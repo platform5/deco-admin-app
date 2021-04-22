@@ -1,6 +1,7 @@
 {
   "debug": true,
   "testing": true,
+  "appName": "Deco Admin App",
   "swissdata": {
     "host": "http://localhost:3000",
     "apiKey": "enterYourKey",

@@ -6,11 +6,13 @@ import routes from './routes';
 import { AuthorizeStep } from 'aurelia-deco';
 import { BaseApp } from 'base/base-app';
 import * as FastClick from 'fastclick';
+import * as environment from '../config/environment.json';
 
 @inject(Global, Router)
 export class App extends BaseApp {
 
   menuDrawer: ArDrawer;
+  appName: string =  environment.appName;
 
   public toolbarTopOpened: boolean = false;
 

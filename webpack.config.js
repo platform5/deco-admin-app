@@ -1,4 +1,5 @@
 const settings = require('./src/settings').default;
+const environment = require('./config/environment.json');
 const path = require('path');
 const plugins = ['aurelia-deco', 'aurelia-resources'];
 const useSrcFor = [];
@@ -29,7 +30,7 @@ const when = (condition, config, negativeConfig) =>
   condition ? ensureArray(config) : ensureArray(negativeConfig);
 
 // primary config:
-const title = settings.title;
+const title = environment.appName;
 const description = settings.description;
 const keywords = settings.keywords;
 const author = settings.author;
