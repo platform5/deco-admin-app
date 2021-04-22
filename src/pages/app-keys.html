@@ -1,0 +1,77 @@
+<template>
+  <require from="./app-keys.css"></require>
+  <section class="banner-block">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+        </ar-breadcrumb>
+        <h1>Keys</h1>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4" align-self-bottom>
+        <ux-button type="raised" click.delegate="addNewKey()"><ux-icon icon="add"></ux-icon> Add New Key</ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section>
+    <ux-grid>
+      <ux-grid-cell md="12">
+        <h2>Public Keys</h2>
+        <ux-card repeat.for="key of app.publicKeys" ref="key.card" class="app-key ${key.card.offsetWidth > 700 ? 'large':'small'}">
+          <ux-card-content>
+            <div class="name">
+              <label>Name</label>
+              ${key.name}
+            </div>
+            <div class="key click" click.delegate="revealKey('public', $index)">
+              <label>Key</label>
+              <template if.bind="key.key">${key.key}</template>
+              <template else >****${key.last4}</template>
+            </div>
+            <div class="status">
+              <label>Status</label>
+              <template if.bind="!key.active">Inactive</template>
+              <template else>
+                <template if.bind="key.expires">Active until ${key.expires | date:'DD.MM.YYYY'}</template>
+                <template else>Active</template>
+              </template>
+            </div>
+            <div class="action">
+              <ux-icon icon="edit" click.delegate="editKey('public', key, $index)"></ux-icon>
+              <ux-icon icon="delete" click.delegate="removeKey('public', key, $index)"></ux-icon>
+            </div>
+          </ux-card-content>
+        </ux-card>
+      </ux-grid-cell>
+      <ux-grid-cell md="12">
+        <h2>Private Keys</h2>
+        <ux-card repeat.for="key of app.privateKeys"  ref="key.card" class="app-key ${key.card.offsetWidth > 700 ? 'large':'small'}">
+          <ux-card-content>
+            <div class="name">
+              <label>Name</label>
+              ${key.name}
+            </div>
+            <div class="key click" click.delegate="revealKey('private', $index)">
+              <label>Key</label>
+              <template if.bind="key.key">${key.key}</template>
+              <template else >****${key.last4}</template>
+            </div>
+            <div class="status">
+              <label>Status</label>
+              <template if.bind="!key.active">Inactive</template>
+              <template else>
+                <template if.bind="key.expires">Active until ${key.expires | date:'DD.MM.YYYY'}</template>
+                <template else>Active</template>
+              </template>
+            </div>
+            <div class="action">
+              <ux-icon icon="edit" click.delegate="editKey('private', key, $index)"></ux-icon>
+              <ux-icon icon="delete" click.delegate="removeKey('private', key, $index)"></ux-icon>
+            </div>
+          </ux-card-content>
+        </ux-card>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+</template>

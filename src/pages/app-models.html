@@ -1,0 +1,61 @@
+<template>
+  <require from="./app-models.css"></require>
+  <section class="banner-block">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+        </ar-breadcrumb>
+      <h1>Models</h1>
+    </ux-grid-cell>
+    <ux-grid-cell sm="4" align-self-bottom>
+      <ux-button type="raised" click.delegate="createNewModel()"><ux-icon icon="add"></ux-icon> Add New Model</ux-button>
+    </ux-grid-cell>
+  </ux-grid>
+  </section>
+  <section>
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-grid-cell sm="8">
+        <ux-list class="border" type="three-line">
+          <ux-list-item class="click" click.delegate="global.navigateToRoute('app-model', {appId: appId, modelId: model.id})" repeat.for="model of models">
+            <div class="ux-list-item__content">
+              ${model.name}
+              <div class="ux-list-item__secondary-content">
+                Slug: '<span class="af strong">${model.slug}</span>',  ${model.fields.length} fields, last update: ${model._updatedAt | date:'nice'}
+              </div>
+            </div>
+            <ux-icon icon="chevron_right"></ux-icon>
+          </ux-list-item>
+        </ux-list>
+      </ux-grid-cell>
+      <ux-card sm="4" class="ux-card--light">
+        <ux-card-header>
+          <ux-card-title class="ux-card__title">Useful links</ux-card-title>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-list class="border" type="three-line">
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-policies', {appId: appId})">
+              <div class="ux-list-item__content">
+                Policies
+                <div class="ux-list-item__secondary-content">
+                  Set policies to secure your data
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-templates', {appId: appId})">
+              <div class="ux-list-item__content">
+                Templates
+                <div class="ux-list-item__secondary-content">
+                  Create beautiful template to communicate with your users
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
+</template>

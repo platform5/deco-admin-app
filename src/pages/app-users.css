@@ -1,0 +1,61 @@
+/* Styles for page AppUsers */
+
+#users-list ux-card {
+  margin-bottom: 20px;
+}
+#users-list .ux-card__header {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+#users-list .ux-card__header small {
+  font-size: 11px;
+}
+
+#users-list ux-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#users-list ux-card-content > div {
+  display: flex;
+  flex-direction: column;
+}
+#users-list label {
+  color: var(--ux-swatch--grey-p400);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+#users-list ux-card.small ux-card-content {
+  flex-wrap: wrap;
+}
+
+#users-list ux-card.small ux-card-content > div{
+  width: 50%;
+}
+
+
+
+
+.app-key div.name {
+  width: 100%;
+  order: 1;
+}
+.app-key div.key {
+  min-width: 120px;
+  order: 2;
+}
+.app-key div.expiry {
+  min-width: 120px;
+  order: 3;
+}
+.app-key div.status {
+  min-width: 90px;
+  order: 4;
+}
+.app-key div.action {
+  min-width: 90px;
+  order: 5;
+}

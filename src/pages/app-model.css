@@ -1,0 +1,11 @@
+/* Styles for page AppModel */
+.ux-list-item__secondary-content.field-options > span {
+  margin-right: 10px;
+  text-decoration: underline;
+}
+/*
+.app-model-settings ux-card {
+  
+}
+*/
+

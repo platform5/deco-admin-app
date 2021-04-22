@@ -1,0 +1,337 @@
+<template>
+  <require from="./exemple.css"></require>
+  <div id="exemple">
+    <ar-main-header background-url="images/welcome.jpg">
+      <h1>Exemples</h1>
+      <p>The following examples are made of <a href="https://github.com/aurelia/ux">Aurelia UX</a> and <a href="https://git.mintello.com/platform5/aurelia-resources">Aurelia Resources</a> elements.</p>
+      <p>Aurelia UX is the official Aurelia library for basic UX elements</p>
+      <p>Aurelia Resources is Platform5 currently private library for useful UX elements</p>
+    </ar-main-header>
+    <section>
+      <h2>&lt;ar-main-header&gt;</h2>
+      <p>The exemple above is made of a &lt;ar-main-header&gt;</p>
+      <p>The bindables are as follow:</p>
+      <p class="bindables">
+        @bindable backgroundUrls: Array&lt;string&gt;;
+        <br>@bindable backgroundUrl: string;
+        <br>@bindable mp4Link: string; 
+        <br>@bindable public theme: ArMainHeaderTheme;
+        <br>@bindable public fixedHeight: number = 300;
+        <br>@bindable public fullScreen: boolean = true;
+        <br>@bindable public transition: string = 'fade';
+        <br>@bindable public duration: number = 10000;
+      </p>
+    </section>  
+    <section class="alternate">
+      <h2>&lt;ar-main-footer&gt;</h2>
+      <p>Provide mainly a themable conventional tag for website footer element</p>
+    </section>
+    <section>
+      <h2>Aurelia UX buttons</h2>
+      <p>
+        <ux-button>Default (raised)</ux-button>
+        <ux-button type="outline">Outline</ux-button>
+        <ux-button type="flat">Flat</ux-button>
+        <ux-button type="fab">Fab</ux-button>
+        <ux-button type="text">Text</ux-button>
+      </p>
+      <p>Button can also be sized with size="small|medium|large".</p>
+    </section>
+    <section class="alternate">
+      <h2>&lt;ux-form&gt; &lt;ux-field&gt; &lt;ux-input&gt; &lt;ux-textarea&gt;</h2>
+      <p>Aurelia UX provides a series of tags for use in forms</p>
+      <ux-form>
+        <ux-field>
+          <label>Firstname</label>
+          <ux-input></ux-input>
+        </ux-field>
+        <ux-field>
+          <label>Comment</label>
+          <ux-textarea auto-resize="true"></ux-textarea>
+        </ux-field>
+      </ux-form>
+      See <a href="https://github.com/aurelia/ux">Aurelia UX</a> for a complete list of available components.
+    </section>
+    <section>
+      <h2>&lt;ar-slider&gt; &lt;ar-slide&gt;</h2>
+      <p>This component is destined to be our go-to element for anything that slides. Unfortunately it is one of our most buggy element and we are currently very unhappy with how it works (or doesn't).</p>
+      <p>The brief is that we would like to have a responsive slider that is able to display one or more visible slide depending of available space and its breakpoint value.</p>
+
+      <ar-slider>
+        <ar-slide>
+          <h1>Slide 1</h1>
+          <img src="${src}">
+        </ar-slide>
+        <ar-slide>
+          <h1>Slide 2</h1>
+          <img src="${src}">
+        </ar-slide>
+        <ar-slide>
+          <h1>Slide 3</h1>
+          <img src="${src}">
+        </ar-slide>
+      </ar-slider>
+
+      <ar-slider slide-breakpoint="640">
+        <ar-slide>
+          <h1>Slide 1</h1>
+          <img src="${src}">
+        </ar-slide>
+        <ar-slide>
+          <h1>Slide 2</h1>
+          <img src="${src}">
+        </ar-slide>
+        <ar-slide>
+          <h1>Slide 3</h1>
+          <img src="${src}">
+        </ar-slide>
+      </ar-slider>
+
+
+
+    </section>
+
+    <section class="alternate">
+      <h2>&lt;ar-next&gt;</h2>
+      <p>This component is designed to provide a screen that can move forward and backward between levels of content. A typical use is a settings screen.</p>
+
+      <ar-next id="settings">
+        <ar-next-item id="main-screen">
+          <h3>This is the first and main screen element</h3>
+          <ux-list>
+            <ux-list-item ar-next="screen2">
+              Go to screen 2
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item ar-next="screen3">
+              Go to screen 3
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ar-next-item>
+        <ar-next-item id="screen2">
+          Screen 2
+          <ux-button  ar-prev="main-screen">Back to main screen</ux-button>
+          <br>
+          <ux-list>
+            <ux-list-item ar-next="screen3">
+              Go to screen 3
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ar-next-item>
+        <ar-next-item id="screen3">
+          Screen 3
+          <ux-button ar-prev="main-screen">Back to main screen</ux-button>
+        </ar-next-item>
+      </ar-next>
+    </section>
+    <section>
+      <h2>&lt;ar-drawer&gt;</h2>
+      <p>When you need to open a drawer from any direction</p>
+      <ux-button click.delegate="leftDrawer.open()">Open left (not fullscreen) drawer</ux-button>
+      <ux-button click.delegate="bottomDrawer.open()">Open bottom (fullscreen) drawer</ux-button>
+
+      <ar-drawer position="left" view-model.ref="leftDrawer" overlay.bind="true">
+        <ux-button click.delegate="leftDrawer.close()">Close Drawer</ux-button>
+      </ar-drawer>
+
+      <ar-drawer position="bottom" full-screen.bind="true" view-model.ref="bottomDrawer">
+        <ux-button click.delegate="bottomDrawer.close()">Close Drawer</ux-button>
+      </ar-drawer>
+    </section>
+    <section class="alternate">
+      <h2>&lt;ar-dialog&gt;</h2>
+      <p>When you need a modal dialog</p>
+      <ux-button click.delegate="happyDialog.open()">Happy ?</ux-button>
+      <ux-button click.delegate="nameDialog.open()">Hello !</ux-button>
+      <ar-dialog title="Hello!" type="confirmation" view-model.ref="happyDialog">
+        Are you happy ?
+      </ar-dialog>
+      <ar-dialog title="Let's get to know each other" type="prompt" view-model.ref="nameDialog">
+        What's your name ?
+        <br><small>Bug here: two inputs ????</small>
+      </ar-dialog>
+    </section>
+    <section>
+      <h2>Notifications</h2>
+      <ux-button click.delegate="notify()">Notify</ux-button>
+      <ux-button click.delegate="notify('danger')">Danger</ux-button>
+      <ux-button click.delegate="notify('primary')">Primary</ux-button>
+      <ux-button click.delegate="notify('warning')">Warning</ux-button>
+      <ux-button click.delegate="notify('info')">Info</ux-button>
+    </section>
+    <section class="alternate">
+      <h2>&lt;ar-select&gt;</h2>
+      <p>As we've found that the select element form Aurelia UX was not of a great help for us we decided to create our own select element in our aurelia-resources library</p>
+      <br>
+      <p class="muted">You can choose the type of select you want</p>
+      <ux-button type="${selectMultiple ? 'outline':'raised'}" click.delegate="setSelectType('single')">Single Option</ux-button>
+      <ux-button type="${selectMultiple ? 'raised':'outline'}" click.delegate="setSelectType('multiple')">Multiple</ux-button>
+      <br>
+      <br>
+      <ar-select multiple.bind="selectMultiple" value.bind="selectValue">
+        <ar-option label="Option 1" value="1"></ar-option>
+        <ar-option label="Option 2" value="2"></ar-option>
+        <ar-option label="Option 3" value="3"></ar-option>
+        <ar-option label="Option 4" value="4"></ar-option>
+        <ar-option label="Option 5" value="5"></ar-option>
+        <ar-option label="Option 6" value="6"></ar-option>
+        <ar-option label="Option 7" value="7"></ar-option>
+        <ar-option label="Option 8" value="8"></ar-option>
+        <ar-option label="Option 9" value="9"></ar-option>
+        <ar-option label="Option 10" value="10"></ar-option>
+        <ar-option label="Option 11" value="11"></ar-option>
+        <ar-option label="Option 12" value="12"></ar-option>
+      </ar-select>
+      <br>
+      <p class="muted">Selected value</p>
+      <p>${selectValue}</div>
+    </section>
+    <section>
+      <h2>&lt;ar-breadcrumb&gt;</h2>
+      <ar-breadcrumb>
+        <ar-breadcrumb-item click.delegate="global.navigateToRoute('home')">Home</ar-breadcrumb-item>
+        <ar-breadcrumb-item class="active" click.delegate="global.navigateToRoute('exemple')">Exemples</ar-breadcrumb-item>
+      </ar-breadcrumb>
+    </section>
+    <section class="alternate">
+      <h2>&lt;ar-parallax&gt;</h2>
+
+      <p class="muted">Slow direction, Intensity 50</p>
+      <ar-parallax style="height: 100px" intensity.bind="50">
+        <img src="${src}">
+      </ar-parallax>
+      
+      <p class="muted">Fast direction, Intensity 60</p>
+      <ar-parallax style="height: 100px" direction="fast" intensity.bind="60">
+        <img src="${src}">
+      </ar-parallax>
+    </section>
+    <section>
+      <h2>&lt;ar-progreess&gt;</h2>
+      <ux-grid>
+        <ux-grid-cell sm="6">
+          <p class="muted">Type "circle"</p>
+          <ar-progress type="circle" width="100px" value.bind="rangeValue" fine-position.bind="ext" animate.bind="true" ></ar-progress>
+        </ux-grid-cell>
+        <ux-grid-cell sm="6">
+          <p class="muted">Type "line"</p>
+          <ar-progress type="line" width="100%" value.bind="rangeValue" fine-position.bind="ext" animate.bind="true" ></ar-progress>
+        </ux-grid-cell>
+      </ux-grid>
+    </section>
+    <section class="alternate">
+      <h2>&lt;ar-range-input&gt;</h2>
+      <p class="muted">Single value</p>
+      <ar-range-input type="square" min.bind="0"  max.bind="100" step.bind="5" value.two-way="rangeValue"></ar-range-input>
+      <p class="muted">Multiple values</p>
+      <ar-range-input type="square" multiple.bind="true" low.bind="rangeValue1" high.bind="rangeValue2" min.bind="0"  max.bind="10000" step.bind="100"></ar-range-input>
+      <p>From ${rangeValue1} to ${rangeValue2}</p>
+    </section>
+    <section>
+      <h2>&lt;ar-search-input&gt;</h2>
+      <ar-search-input value.bind="q"></ar-search-input>
+      <p class="muted">Searching for "${q}"</p>
+    </section>
+    <section class="alternate">
+      <h2>&lt;ar-spinner-line&gt; &lt;ar-spinner-icon&gt;</h2>
+      <ux-grid>
+        <ux-grid-cell sm="6">
+          <ar-spinner-line style="height: 3px;"></ar-spinner-line>
+        </ux-grid-cell>
+        <ux-grid-cell sm="6">
+          <ar-spinner-icon></ar-spinner-icon>
+          &nbsp;&nbsp;
+          <ar-spinner-icon color="accent"></ar-spinner-icon>
+          &nbsp;&nbsp;
+          <ar-spinner-icon color="dark"></ar-spinner-icon>
+          &nbsp;&nbsp;
+          <ar-spinner-icon color="light"></ar-spinner-icon>
+        </ux-grid-cell>
+      </ux-grid>
+    </section>
+    <section>
+      <h2>&lt;ar-timeline&gt;</h2>
+      <p>This component is destined to display chronological informations in a timeline manner. It has many options (not documented). We feel it's not very stable</p>
+
+      <p class="muted">Basic, left-right, not ordered</p>
+      <ar-timeline>
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>        
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>        
+      </ar-timeline>
+
+      <p class="muted">All left, not ordered</p>
+      <ar-timeline positionning="all-left">
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>        
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>        
+      </ar-timeline>
+
+      <p class="muted">All right, not ordered</p>
+      <ar-timeline positionning="all-right">
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>        
+        <ar-timeline-item>
+          <h2>Content</h2>
+          <p>With some text</p>
+        </ar-timeline-item>        
+      </ar-timeline>
+
+      <p class="muted">Alternate, ordered</p>
+      <ux-button type="text" click.delegate="asc = !asc">Toggle order</ux-button>
+      <ar-timeline order="${asc ? 'asc':'desc'}">
+        <ar-timeline-item date.bind="date1">
+          <h2>Content with date 1</h2>
+          <p>With some text</p>
+          <p class="muted">${date1 | date}</p>
+        </ar-timeline-item>
+        <ar-timeline-item date.bind="date2">
+          <h2>Content with date 2</h2>
+          <p>With some text</p>
+          <p class="muted">${date2 | date}</p>
+        </ar-timeline-item>        
+        <ar-timeline-item date.bind="date3">
+          <h2>Content with date 3</h2>
+          <p>With some text</p>
+          <p class="muted">${date3 | date}</p>
+        </ar-timeline-item>
+        <ar-timeline-item date.bind="date2">
+          <h2>Content with date 2</h2>
+          <p>With some text</p>
+          <p class="muted">${date2 | date}</p>
+        </ar-timeline-item>
+        <ar-timeline-item date.bind="date1">
+          <h2>Content with date 1</h2>
+          <p>With some text</p>
+          <p class="muted">${date1 | date}</p>
+        </ar-timeline-item>
+      </ar-timeline>
+    </section>
+  </div>
+</template>

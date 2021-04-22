@@ -1,0 +1,16 @@
+<template>
+  <require from="./ad-dialog-user.css"></require>
+  <ux-form if.bind="instance">
+    <ux-field>
+      <label>Roles</label>
+      <div class="form-row">
+        <span class="choice" repeat.for="role of ['admin', 'user', 'keys', 'templates', 'policies', 'models', 'settings']">
+          <ux-checkbox value.two-way="role" checked.two-way="instance.roles"></ux-checkbox>
+          <label slot="label" class="click">${role}</label>
+        </span>
+      </div>
+    </ux-field>
+
+  </ux-form>
+</template>
+    

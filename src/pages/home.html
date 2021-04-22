@@ -1,0 +1,11 @@
+<template>
+  <require from="./home.css"></require>
+  <section>
+    <h1>Home</h1>
+    <p>Do you like surprises ?</p>
+    <ux-button type="outline" click.delegate="hideSurprise()">No !</ux-button>
+    <ux-button ar-drawer-toggle="bottom-drawer-exemple" if.bind="!global.state.surpriseHidden">Yes</ux-button>
+
+    <img class="welcome-image" src="/images/welcome.jpg">
+  </section>
+</template>

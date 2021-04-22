@@ -1,0 +1,196 @@
+<template>
+  <ux-form if.bind="instance">
+    <ux-field label="Name">
+      <ux-input type="text" value.bind="instance.name"></ux-input>
+    </ux-field>
+    <ux-field label="Type">
+      <ar-select value.bind="instance.type">
+        <ar-option value="any">Any</ar-option>
+        <ar-option value="string">String</ar-option>
+        <ar-option value="integer">Integer</ar-option>
+        <ar-option value="float">Float</ar-option>
+        <ar-option value="date">Date</ar-option>
+        <ar-option value="array">Array</ar-option>
+        <ar-option value="boolean">Boolean</ar-option>
+        <ar-option value="select">Select</ar-option>
+        <ar-option value="model">Model</ar-option>
+        <ar-option value="models">Models</ar-option>
+        <ar-option value="file">File</ar-option>
+        <ar-option value="files">Files</ar-option>
+        <ar-option value="metadata">Metadata</ar-option>
+      </ar-select>
+    </ux-field>
+
+    <ux-list class="border remove-padding">
+      <template if.bind="instance.type === 'string'">
+      <ux-list-item>
+        <div class="ux-list-item__content">
+          <span>Multilang</span>
+          <div class="ux-list-item__secondary-content"></div>
+        </div>
+        <ux-switch checked.bind="instance.options.multilang"></ux-switch>
+      </ux-list-item>
+      <ux-list-item>
+        <div class="ux-list-item__content">
+          <span>Textarea</span>
+          <div class="ux-list-item__secondary-content"></div>
+        </div>
+        <ux-switch checked.bind="instance.options.textarea"></ux-switch>
+      </ux-list-item>
+      <ux-list-item>
+        <div class="ux-list-item__content">
+          <span>Slug validation</span>
+          <div class="ux-list-item__secondary-content">Only accept slug value such as "this-is-a-slug"</div>
+        </div>
+        <ux-switch checked.bind="instance.onlySlug"></ux-switch>
+      </ux-list-item>
+      <ux-list-item>
+        <div class="ux-list-item__content">
+          <span>Email validation</span>
+          <div class="ux-list-item__secondary-content">Only accept email value such as "name@email.com"</div>
+        </div>
+        <ux-switch checked.bind="instance.onlyEmail"></ux-switch>
+      </ux-list-item>
+      </template>
+      <template if.bind="instance.type === 'select'">
+        <ux-list-item>
+          <ux-field label="Select Options">
+            <ux-chip-input chips.bind="instance.options.options"></ux-chip-input>
+            <ux-input-info>The user will be able to select from these options</ux-input-info>
+          </ux-field>
+        </ux-list-item>
+        <ux-list-item>
+          <div class="ux-list-item__content">
+            <span>Allow Multiple Options</span>
+            <div class="ux-list-item__secondary-content">If yes, the data will be stored as array</div>
+          </div>
+          <ux-switch checked.bind="instance.options.multiple"></ux-switch>
+        </ux-list-item>
+        <ux-list-item>
+          <div class="ux-list-item__content">
+            <span>Allow Any value</span>
+            <div class="ux-list-item__secondary-content">If yes, options that are not part of the list will be accepted</div>
+          </div>
+          <ux-switch checked.bind="instance.options.allowAny"></ux-switch>
+        </ux-list-item>
+        <ux-list-item show.bind="instance.options.allowAny">
+          <div class="ux-list-item__content">
+            <ux-field label="Add Extra Value Button Text">
+              <ux-input value.bind="instance.options.addExtraValueButtonText"></ux-input>  
+            </ux-field>
+          </div>
+        </ux-list-item>
+      </template>
+      <template if.bind="instance.type === 'file' || instance.type === 'files'">
+        <ux-list-item>
+          <div class="ux-list-item__content">
+            <ux-field label="Accepted Mimetypes">
+              <ux-chip-input chips.bind="instance.options.accepted"></ux-chip-input>
+              <ux-input-info>Exemple: image/*, application/pdf</ux-input-info>
+            </ux-field>
+          </div>
+        </ux-list-item>
+        <ux-list-item>
+          <div class="ux-list-item__content">
+            <ux-field label="Preview formats">
+              <ux-chip-input chips.bind="instance.options.previewsFormats"></ux-chip-input>
+              <ux-input-info>Exemple: 320:320, 100, 160:90</ux-input-info>
+            </ux-field>
+          </div>
+        </ux-list-item>
+        <ux-list-item show.bind="instance.options.previewsFormats && instance.options.previewsFormats.length">
+          <div class="ux-list-item__content">
+            <ux-field label="Default Preview Format">
+              <ux-form>
+                <div class="form-row" repeat.for="format of instance.options.previewsFormats">
+                  <ux-radio value.bind="format" checked.bind="instance.options.defaultPreview"></ux-radio>
+                  <label slot="label">${format}</label>
+                </div>
+              </ux-form>
+            </ux-field>
+          </div>
+        </ux-list-item>
+
+      </template>
+
+      <template if.bind="instance.type === 'date'">
+        <ux-list-item>
+          <div class="ux-list-item__content">
+            <ux-field label="Date Format">
+              <ux-input value.bind="instance.options.dateFormat"></ux-input>  
+              <ux-input-info>Exemple: DD.MM.YYYY</ux-input-info>
+            </ux-field>
+          </div>
+        </ux-list-item>
+      </template>
+
+      <template if.bind="instance.type === 'array'">
+        <ux-list-item>
+          <div class="ux-list-item__content">
+            <ux-field label="Array Type">
+              <ar-select value.bind="instance.options.type">
+                <ar-option value="any"></ar-option>
+                <ar-option value="string"></ar-option>
+                <ar-option value="integer"></ar-option>
+                <ar-option value="float"></ar-option>
+              </ar-select>
+              <ux-input-info>Only Array&lt;string&gt; are supported by &lt;deco-field&gt;</ux-input-info>
+            </ux-field>
+          </div>
+        </ux-list-item>
+      </template>
+
+      <template if.bind="instance.type === 'model' || instance.type === 'models'">
+        <ux-list-item>
+          <div class="ux-list-item__content">
+            <ux-field label="Related Model"></ux-field>
+            <ar-select value.bind="instance.options.model">
+              <ar-option repeat.for="model of params.data.models" value.bind="model.id" label.bind="model.name"></ar-option>
+            </ar-select>
+          </div>
+        </ux-list-item>
+      </template>
+
+      <ux-list-item>
+        <div class="ux-list-item__content">
+          <span>Required</span>
+          <div class="ux-list-item__secondary-content"></div>
+        </div>
+        <ux-switch checked.bind="instance.required"></ux-switch>
+      </ux-list-item>
+      <ux-list-item>
+        <div class="ux-list-item__content">
+        <span>Sortable</span>
+        <div class="ux-list-item__secondary-content"></div>
+        </div>
+        <ux-switch checked.bind="instance.sortable"></ux-switch>
+      </ux-list-item>
+      <ux-list-item>
+        <div class="ux-list-item__content">
+        <span>Searchable</span>
+        <div class="ux-list-item__secondary-content"></div>
+        </div>
+        <ux-switch checked.bind="instance.searchable"></ux-switch>
+      </ux-list-item>
+    </ux-list>
+
+    <ux-field label="Filterable">
+      <ar-select value.bind="instance.filterable">
+        <ar-option value="no">No</ar-option>
+        <ar-option value="auto" if.bind="!(instance.type === 'model' || instance.type === 'models' || instance.type === 'any')">Auto</ar-option>
+        <ar-option value="equal" if.bind="!(instance.type === 'model' || instance.type === 'models' || instance.type === 'any')">Equal</ar-option>
+        <ar-option value="number" if.bind="(instance.type === 'integer' || instance.type === 'float')">Number</ar-option>
+        <ar-option value="text" if.bind="!(instance.type === 'model' || instance.type === 'models' || instance.type === 'any')">Text</ar-option>
+        <ar-option value="categories" if.bind="!(instance.type === 'model' || instance.type === 'models' || instance.type === 'any')">Categories (and)</ar-option>
+        <ar-option value="tags" if.bind="!(instance.type === 'model' || instance.type === 'models' || instance.type === 'any')">Tags (or)</ar-option>
+        <ar-option value="date" if.bind="instance.type === 'date'">Date</ar-option>
+        <ar-option value="boolean" if.bind="instance.type === 'boolean'">Boolean</ar-option>
+        <ar-option value="array" if.bind="!(instance.type === 'model' || instance.type === 'models' || instance.type === 'any')">Array</ar-option>
+        <ar-option value="id" if.bind="(instance.type === 'model' || instance.type === 'models')">Id</ar-option>
+        <ar-option value="ids" if.bind="(instance.type === 'model' || instance.type === 'models')">Ids</ar-option>
+      </ar-select>
+    </ux-field>
+
+  </ux-form>
+</template>
+    

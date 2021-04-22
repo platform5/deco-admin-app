@@ -1,0 +1,63 @@
+<template>
+  <require from="./app-users.css"></require>
+  <section class="banner-block">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+        </ar-breadcrumb>
+        <h1>Users</h1>
+        <ux-button click.delegate="mode = 'internal'" type="${mode === 'internal' ? 'raised':'flat'}">Internal Users</ux-button> 
+        <ux-button click.delegate="mode = 'swissdata'" type="${mode === 'swissdata' ? 'raised':'flat'}" class="accent">Swissdata Users</ux-button>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4" align-self-bottom>
+        <ux-button type="raised" click.delegate="inviteUser()" if.bind="mode === 'swissdata'"><ux-icon icon="add"></ux-icon> Invite User</ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section id="users-list">
+    <ux-grid theme.bind="{outerPadding:'0'}" align-cells-middle>
+      <ux-grid-cell sm="6">
+        <h2 if.bind="mode === 'internal'">Internal Users</h2>
+        <h2 if.bind="mode === 'swissdata'">Internal Users</h2>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6" >
+        <ar-search-input value.two-way="search"></ar-search-input>
+      </ux-grid-cell>
+    </ux-grid>
+    <ux-card repeat.for="user of users |filterSearch:search" ref="user.__card" class="${user.__card.offsetWidth > 700 ? 'large':'small'}">
+      <ux-card-header>
+        <ux-card-title class="ux-card__title">
+          ${user._label}
+          <br><small class="muted">${user.id}</small>
+        </ux-card-title>
+        <ux-card-action-row if.bind="mode === 'internal'">
+          <ux-icon icon="edit" click.delegate="editInternalUser(user)"></ux-icon>
+        </ux-card-action-row>
+        <ux-card-action-row if.bind="mode === 'swissdata'">
+          <ux-icon icon="edit" click.delegate="editSwissdataUser(user)"></ux-icon>
+          <ux-icon icon="clear" click.delegate="removeSwissdataUser(user)"></ux-icon>
+        </ux-card-action-row>
+      </ux-card-header>
+      <ux-card-content>
+        <div class="email">
+          <label>Email</label>
+          <span>${user.email} <ux-icon icon="${user.emailValidated ? 'check':'error'}"></ux-icon></span>
+        </div>
+        <div class="mobile">
+          <label>Mobile</label>
+          <span>${user.mobile} <ux-icon icon="${user.mobileValidated ? 'check':'error'}"></ux-icon></span>
+        </div>
+        <div class="double-auth">
+          <label>Require Double Authentication</label>
+          <ux-switch checked.bind="user.requireDoubleAuth" disabled></ux-switch>
+        </div>
+        <div class="roles">
+          <label>Roles</label>
+          ${user.roles.join(', ')}
+        </div>
+      </ux-card-content>
+    </ux-card>
+  </section>
+</template>

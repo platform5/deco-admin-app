@@ -1,0 +1,10 @@
+<template>
+  <require from="./app-policies.css"></require>
+  <section>
+    <ar-breadcrumb theme.bind="{pillBackground: 'var(--ux-swatch--grey-p100)'}">
+      <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+      <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+    </ar-breadcrumb>
+    <h1>Policies</h1>
+  </section>
+</template>

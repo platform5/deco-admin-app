@@ -1,0 +1,17 @@
+<template>
+  <ux-form>
+    <ux-field>
+      <label>Key type</label>
+      <div class="form-row">
+        <ux-radio model.bind="'private'" checked.bind="value.type"></ux-radio>
+        <label>Private</label>
+        <ux-radio model.bind="'public'" checked.bind="value.type"></ux-radio>
+        <label>Public</label>
+      </div>
+    </ux-field>
+    <ux-field>
+      <label>Key name</label>
+      <ux-input value.bind="value.name"></ux-input>
+    </ux-field>
+  </ux-form> 
+</template>

@@ -1,0 +1,19 @@
+<template>
+  <ux-form if.bind="instance">
+    <deco-field instance.bind="instance" property="title"></deco-field>
+    <deco-field instance.bind="instance" property="message"></deco-field>
+    <deco-field instance.bind="instance" property="sendAt"></deco-field>
+    <deco-field instance.bind="instance" property="contentAvailable"></deco-field>
+    <deco-field instance.bind="instance" property="badge"></deco-field>
+    <deco-field instance.bind="instance" property="custom"></deco-field>
+
+    <ux-field>
+      <label>Tags</label>
+      <div class="form-row" repeat.for="tag of data.tags | objectKeys">
+        <ux-checkbox checked.bind="instance.tags" model.bind="tag"></ux-checkbox> ${tag} (${data.tags[tag]})
+      </div>
+    </ux-field>
+
+  </ux-form>
+</template>
+    

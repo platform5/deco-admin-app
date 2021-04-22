@@ -1,0 +1,137 @@
+<template>
+  <require from="./app-model.css"></require>
+  <section class="banner-block">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app-models', {appId: appId})">Models</ar-breadcrumb-item>
+        </ar-breadcrumb>
+        <h1>${model.name}</h1>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4" align-self-bottom>
+        <ux-button type="raised" click.delegate="addNewField()"><ux-icon icon="add"></ux-icon> Add New Field</ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section>  
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-card sm="6"  class="ux-card--light">
+        <ux-card-header>
+          <ux-card-title class="ux-card__title">Fields</ux-card-title>
+          <ux-card-sub-title class="ux-card__sub-title">Tell us how this model must hold your datas</ux-card-sub-title>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-list class="border" type="two-line">
+            <ux-list-item reorderable-repeat.for="field of model.fields" reorderable-dnd-handler-selector=".handle" reorderable-after-reordering="updateOrdering" click.delegate="clickOnField(field)">
+              <ux-icon icon="reorder" class="ux-list-item__detail handle needsclick"></ux-icon>
+              <div class="ux-list-item__content">
+                <div><span class="strong">${field.name}<span if.bind="!field.required">?</span></span>: <span class="af">${field.type}</span></div>
+                <div class="ux-list-item__secondary-content field-options">
+                  <template if.bind="field.type === 'string'">
+                    <span if.bind="field.options && field.options.multilang">multilang</span>
+                    <span if.bind="field.options && field.options.textarea">textarea</span>
+                  </template>
+                  <template if.bind="field.type === 'select'">
+                    <span if.bind="field.options && field.options.multiple">multiple</span>
+                    <span if.bind="field.options && field.options.allowAny">allowAny</span>
+                    <span if.bind="field.options && field.options.options">${field.options.options.join(', ')}</span>
+                  </template>
+                  <template if.bind="field.type === 'file' || field.type === 'files'">
+                    <span if.bind="field.options && field.options.accepted">${field.options.accepted}</span>
+                    <span if.bind="field.options && field.options.defaultPreview"><span class="strong af">${field.options.defaultPreview}</span></span>
+                    <span if.bind="field.options && field.options.previewsFormats">${field.options.previewsFormats.join(', ')}</span>
+                  </template>
+                  <template if.bind="field.type === 'date'">
+                    <span if.bind="field.options && field.options.dateFormat">${field.options.dateFormat}</span>
+                  </template>
+                  <template if.bind="field.type === 'model' || field.type === 'models'">
+                    <span if.bind="field.options && field.options.model && models && models.length">${modelName(field.options.model)}</span>
+                  </template>
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+      <ux-grid-cell sm="6" class="ux-card--light">
+        <ux-card class="settings-card ${mainSettingsOpened ? 'opened':''}">
+          <ux-card-header>
+            <ux-card-title class="ux-card__title click" click.delegate="mainSettingsOpened = !mainSettingsOpened">Main Settings <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="mainSettingsOpened" class="au-animate animate-zoom">
+            <ux-form if.bind="model">
+              <deco-field instance.bind="model" property="name"></deco-field>
+              <deco-field instance.bind="model" property="slug"></deco-field>
+              <deco-field instance.bind="model" property="label"></deco-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('main')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${accessSettingsOpened ? 'opened':''}">
+          <ux-card-header>
+            <ux-card-title class="ux-card__title click" click.delegate="accessSettingsOpened = !accessSettingsOpened">Access Settings <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="accessSettingsOpened" class="au-animate animate-zoom">
+            <ux-form if.bind="model">
+              <ux-field class="policy-field">
+                <label>Policy</label>
+                <ux-textarea if.bind="accessSettingsOpened" value.bind="model.policy | json2string" auto-resize></ux-textarea>
+              </ux-field>
+
+              <deco-field instance.bind="model" property="isPublic"></deco-field>
+
+              <deco-field instance.bind="model" property="readingAccess"></deco-field>
+              <deco-field show.bind="model.readingAccess === 'usersWithRoles'" instance.bind="model" property="readingRoles"></deco-field>
+              <deco-field instance.bind="model" property="writingAccess"></deco-field>
+              <deco-field show.bind="model.writingAccess === 'usersWithRoles'" instance.bind="model" property="writingRoles"></deco-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('access')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${notificationsSettingsOpened ? 'opened':''}">
+          <ux-card-header>
+            <ux-card-title class="ux-card__title click" click.delegate="notificationsSettingsOpened = !notificationsSettingsOpened">Notification Settings <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="notificationsSettingsOpened" class="au-animate animate-zoom">
+              <ux-form if.bind="model">
+                <deco-field instance.bind="model" property="enableAdminNotification"></deco-field>
+                <deco-field instance.bind="model" property="enableUserNotification"></deco-field>
+                
+                <deco-field instance.bind="model" property="notifyWhen" show.bind="model.enableAdminNotification || model.enableUserNotification"></deco-field>
+                <deco-field instance.bind="model" property="notificationAdminEmail" show.bind="model.enableAdminNotification"></deco-field>
+                <deco-field instance.bind="model" property="notificationAdminSubject" show.bind="model.enableAdminNotification"></deco-field>
+                <deco-field instance.bind="model" property="notificationAdminContentPrefix" show.bind="model.enableAdminNotification  && !model.notificationAdminTemplate"></deco-field>
+                <deco-field instance.bind="model" property="notificationAdminContentSuffix" show.bind="model.enableAdminNotification  && !model.notificationAdminTemplate"></deco-field>
+                <deco-field instance.bind="model" property="notificationAdminTemplate" show.bind="model.enableAdminNotification"></deco-field>
+                <deco-field instance.bind="model" property="notificationUserField" show.bind="model.enableUserNotification"></deco-field>
+                <deco-field instance.bind="model" property="notificationUserSubject" show.bind="model.enableUserNotification"></deco-field>
+                <deco-field instance.bind="model" property="notificationUserContentPrefix" show.bind="model.enableUserNotification && !model.notificationUserTemplate"></deco-field>
+                <deco-field instance.bind="model" property="notificationUserContentSuffix" show.bind="model.enableUserNotification && !model.notificationUserTemplate"></deco-field>
+                <deco-field instance.bind="model" property="notificationUserTemplate" show.bind="model.enableUserNotification"></deco-field>
+              </ux-form>
+              <ux-card-action-row>
+                <ux-button click.delegate="saveSettings('notification')">Save</ux-button>
+              </ux-card-action-row>
+            </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${dangerSettingsOpened ? 'opened':''}">
+          <ux-card-header>
+            <ux-card-title class="ux-card__title click" click.delegate="dangerSettingsOpened = !dangerSettingsOpened">Danger Zone <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="dangerSettingsOpened" class="au-animate animate-zoom">
+              <ux-card-action-row>
+                <ux-button type="text" click.delegate="deleteModel()">Delete Model</ux-button>
+              </ux-card-action-row>
+            </ux-card-content>
+        </ux-card>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+</template>

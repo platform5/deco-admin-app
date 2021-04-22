@@ -1,0 +1,51 @@
+<template>
+  <require from="./app-push.css"></require>
+  <section class="banner">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+        </ar-breadcrumb>
+        <h1>Push</h1>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4" align-self-bottom>
+        <ux-button type="raised" click.delegate="newNotification()"><ux-icon icon="add"></ux-icon> New Notification</ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section class="app-notifications">  
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-grid-cell sm="8"  class="ux-card--light">
+        <ux-card repeat.for="notification of notifications">
+          <ux-card-header>
+            ${notification.title}
+            <br><span class="muted">${notification.message}</span>
+            <br><span class="muted">Sent to ${notification.nbSent} devices on ${notification.sentAt}</span>
+          </ux-card-header>
+        </ux-card>
+      </ux-grid-cell>
+      <ux-card sm="4" class="ux-card--light">
+        <ux-card-header>
+          <ux-card-title class="ux-card__title">Push Players</ux-card-title>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-list class="border" type="three-line">
+            <ux-list-item  click.delegate="global.navigateToRoute('app-policies', {appId: appId})">
+              <div class="ux-list-item__content">
+                Players
+              </div>
+              <span class="badge">${nbPlayers}</span>
+            </ux-list-item>
+            <ux-list-item repeat.for="tag of tags | objectKeys">
+              <div class="ux-list-item__content">
+                ${tag}
+              </div>
+              <span class="badge">${tags[tag]}</span>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+  </section>
+</template>

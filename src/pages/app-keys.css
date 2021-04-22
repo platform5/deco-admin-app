@@ -1,0 +1,56 @@
+.app-key {
+  margin-bottom: 20px;
+}
+
+.app-key ux-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.app-key ux-card-content > div {
+  display: flex;
+  flex-direction: column;
+}
+.app-key label {
+  color: var(--ux-swatch--grey-p400);
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.app-key div.name {
+  width: 100%;
+  order: 1;
+}
+.app-key div.key {
+  min-width: 150px;
+  order: 2;
+}
+.app-key div.status {
+  min-width: 200px;
+  order: 4;
+}
+.app-key div.action {
+  min-width: 90px;
+  order: 5;
+}
+
+.app-key.small ux-card-content {
+  flex-wrap: wrap;
+}
+
+.app-key.small ux-card-content > div{
+  min-width: auto;
+}
+.app-key.small div.name {
+  width: 70%;
+}
+.app-key.small div.action {
+  width: 25%;
+  order: 1;
+  flex-direction: row;
+}
+.app-key.small div.key,
+.app-key.small div.expirty,
+.app-key.small div.status {
+  width: 30%;
+}

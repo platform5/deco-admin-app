@@ -1,0 +1,7 @@
+/* Styles for page Apps */
+#apps ux-list.border {
+  border-top: none;
+}
+#apps ux-list.border ux-list-item:last-of-type {
+  border-bottom: none;
+}

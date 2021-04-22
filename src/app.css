@@ -1,0 +1,46 @@
+ux-chip-input ux-chip {
+  margin-top: 6px;
+}
+
+ux-chip-input .ux-chip-input__inner-input {
+  min-width: 80px;
+}
+
+ux-card-header {
+  border-radius: 8px 8px 0 0;
+}
+
+ux-card-action-row {
+  justify-content: flex-end;
+}
+section.banner-block {
+  display: block;
+  background: var(--aurelia-ux--design-primary);
+  color: var(--aurelia-ux--design-primary-foreground);
+}
+section > ux-grid > ux-card.ux-card--light {
+  box-shadow: 
+    0 2px 2px 0 rgba(0, 0, 0, 0.07),
+    0 3px 1px -2px rgba(0, 0, 0, 0.1),
+    0 1px 3px 0 rgba(0, 0, 0, 0.06);
+}
+
+.settings-card {
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.settings-card ux-card-title {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  flex-direction: row;
+  background: white;
+  
+}
+.settings-card ux-card-title ux-icon {
+  transition: transform 250ms ease-in;
+}
+.settings-card.opened ux-card-title ux-icon {
+  transform: rotate(90deg);
+}

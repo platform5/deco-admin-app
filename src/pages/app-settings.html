@@ -1,0 +1,178 @@
+<template>
+  <require from="./app-settings.css"></require>
+  <section class="banner-block">
+    <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+      <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+      <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+    </ar-breadcrumb>
+    <h1>Settings</h1>
+  </section>
+  <section>
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-grid-cell sm="6">
+        <ux-card class="settings-card ${mainSettingsOpened ? 'opened':''}">
+          <ux-card-header class="click" click.delegate="mainSettingsOpened = !mainSettingsOpened">
+            <ux-card-title class="ux-card__title">Main settings <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="mainSettingsOpened" class="au-animate animate-zoom">
+            <ux-form if.bind="app">
+              <deco-field instance.bind="app" property="name"></deco-field>
+              <deco-field instance.bind="app" property="description"></deco-field>
+              <deco-field instance.bind="app" property="image"></deco-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('main')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+      </ux-grid-cell>
+      <ux-grid-cell sm="6">
+        <ux-card class="settings-card ${colorsSettingsOpened ? 'opened':''}">
+          <ux-card-header class="click" click.delegate="colorsSettingsOpened = !colorsSettingsOpened">
+            <ux-card-title class="ux-card__title">Colors <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="colorsSettingsOpened" class="au-animate animate-zoom">
+            <p>You can define the main colors used in your application. These colors can be fetched and used when you develop your client application and will also impact the look of the emails sent by Deco-API</p>
+            <ux-form>
+              <deco-field instance.bind="app" property="primaryColor"></deco-field>            
+              <deco-field instance.bind="app" property="primaryForegroundColor"></deco-field>            
+              <deco-field instance.bind="app" property="primaryLightColor"></deco-field>            
+              <deco-field instance.bind="app" property="primaryLightForegroundColor"></deco-field>            
+              <deco-field instance.bind="app" property="primaryDarkColor"></deco-field>            
+              <deco-field instance.bind="app" property="primaryDarkForegroundColor"></deco-field>            
+              <deco-field instance.bind="app" property="accentColor"></deco-field>            
+              <deco-field instance.bind="app" property="accentForegroundColor"></deco-field>            
+              <deco-field instance.bind="app" property="accentLightColor"></deco-field>            
+              <deco-field instance.bind="app" property="accentLightForegroundColor"></deco-field>            
+              <deco-field instance.bind="app" property="accentDarkColor"></deco-field>            
+              <deco-field instance.bind="app" property="accentDarkForegroundColor"></deco-field>            
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('colors')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${languageSettingsOpened ? 'opened':''}">
+          <ux-card-header class="click" click.delegate="languageSettingsOpened = !languageSettingsOpened">
+            <ux-card-title class="ux-card__title">Language <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="languageSettingsOpened" class="au-animate animate-zoom">
+            <ux-form>
+              <deco-field instance.bind="app" property="locales"></deco-field>            
+              <ux-field label="defaultLocale">
+                <ux-select value.bind="app.defaultLocale">
+                  <ux-option repeat.for="locale of app.locales" value.bind="locale">${locale}</ux-option>
+                </ux-select>
+              </ux-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('language')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${registrationSettingsOpened ? 'opened':''}">
+          <ux-card-header class="click" click.delegate="registrationSettingsOpened = !registrationSettingsOpened">
+            <ux-card-title class="ux-card__title">Registration <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="registrationSettingsOpened" class="au-animate animate-zoom">
+            <ux-form>
+              <deco-field instance.bind="app" property="openUserRegistration"></deco-field>
+              <deco-field instance.bind="app" property="createAccountValidation" show.bind="app.openUserRegistration"></deco-field>
+              <deco-field instance.bind="app" property="requireDoubleAuth" show.bind="app.openUserRegistration"></deco-field>
+              <deco-field instance.bind="app" property="doubleAuthMethod" show.bind="app.openUserRegistration"></deco-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('registration')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${rolesSettingsOpened ? 'opened':''}">
+          <ux-card-header class="click" click.delegate="rolesSettingsOpened = !rolesSettingsOpened">
+            <ux-card-title class="ux-card__title">Roles <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="rolesSettingsOpened" class="au-animate animate-zoom">
+            <ux-form>
+              <deco-field instance.bind="app" property="availableRoles"></deco-field>
+
+              <ux-field>
+                  <label>${propertyLabel(app, 'adminUserRoles') | t}</label>
+                <ux-form>
+                  <div class="form-row" repeat.for="role of app.availableRoles">
+                    <ux-checkbox value.bind="role" checked.bind="app.adminUserRoles"></ux-checkbox>
+                    <label slot="label">${role}</label>
+                  </div>
+                </ux-form>
+              </ux-field>
+    
+              <deco-field instance.bind="app" property="enableShop"></deco-field>
+              <deco-field instance.bind="app" property="enableMultipleShops"></deco-field>
+    
+              <ux-field if.bind="app.enableShop">
+                <label>${propertyLabel(app, 'enableShop') | t}</label>
+                <ux-form>
+                  <div class="form-row" repeat.for="role of app.availableRoles">
+                    <ux-checkbox value.bind="role" checked.bind="app.adminShopRoles"></ux-checkbox>
+                    <label slot="label">${role}</label>
+                  </div>
+                </ux-form>
+              </ux-field>
+
+              <deco-field instance.bind="app" property="enableThree"></deco-field>
+    
+              <ux-field if.bind="app.enableThree">
+                <label>${propertyLabel(app, 'adminThreeRoles') | t}</label>
+                <ux-form>
+                  <div class="form-row" repeat.for="role of app.availableRoles">
+                    <ux-checkbox value.bind="role" checked.bind="app.adminThreeRoles"></ux-checkbox>
+                    <label slot="label">${role}</label>
+                  </div>
+                </ux-form>
+              </ux-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('roles')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${smtpSettingsOpened ? 'opened':''}">
+          <ux-card-header class="click" click.delegate="smtpSettingsOpened = !smtpSettingsOpened">
+            <ux-card-title class="ux-card__title">Email (SMTP) <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="smtpSettingsOpened" class="au-animate animate-zoom">
+            <ux-form>
+              <deco-field instance.bind="app" property="smtpConfigHost"></deco-field>
+              <deco-field instance.bind="app" property="smtpConfigPort"></deco-field>
+              <deco-field instance.bind="app" property="smtpConfigUser"></deco-field>
+              <deco-field instance.bind="app" property="smtpConfigPassword"></deco-field>
+              <deco-field instance.bind="app" property="smtpConfigSecure"></deco-field>
+              <deco-field instance.bind="app" property="smtpConfigFromName"></deco-field>
+              <deco-field instance.bind="app" property="smtpConfigFromEmail"></deco-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('smtp')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+        <ux-card class="settings-card ${pushSettingsOpened ? 'opened':''}">
+          <ux-card-header class="click" click.delegate="pushSettingsOpened = !pushSettingsOpened">
+            <ux-card-title class="ux-card__title">Push <ux-icon icon="chevron_right"></ux-icon></ux-card-title>
+          </ux-card-header>
+          <ux-card-content show.bind="pushSettingsOpened" class="au-animate animate-zoom">
+            <ux-form>
+              <deco-field instance.bind="app" property="pushEnabled"></deco-field>
+              <deco-field instance.bind="app" property="pushGmId"></deco-field>
+              <deco-field instance.bind="app" property="pushApnCert"></deco-field>
+              <deco-field instance.bind="app" property="pushApnKey"></deco-field>
+              <deco-field instance.bind="app" property="pushApnPass"></deco-field>
+              <deco-field instance.bind="app" property="pushApnProduction"></deco-field>
+              <deco-field instance.bind="app" property="pushTopic"></deco-field>
+            </ux-form>
+            <ux-card-action-row>
+              <ux-button click.delegate="saveSettings('push')">Save</ux-button>
+            </ux-card-action-row>
+          </ux-card-content>
+        </ux-card>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+</template>

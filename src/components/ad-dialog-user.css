@@ -1,0 +1,10 @@
+ar-dialog .form-row .choice {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 6px;
+  margin-right: 10px;
+}
+
+ar-dialog .form-row .choice ux-checkbox {
+  margin-right: 6px;
+}

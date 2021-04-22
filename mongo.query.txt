@@ -1,0 +1,2 @@
+# set all first api key (public / private) as active
+db.apps.update({}, {$set:{"publicKeys.0.active": true, "privateKeys.0.active": true}}, {multi: true})

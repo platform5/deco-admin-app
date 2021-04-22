@@ -1,0 +1,21 @@
+<template>
+  <require from="./ad-dialog-user.css"></require>
+  <ux-form if.bind="instance">
+    <template repeat.for="prop of instance.deco.propertyTypes | objectKeys">
+      <template if.bind="prop === 'roles'">
+        <ux-field>
+          <label>Roles</label>
+          <div class="form-row">
+            <span class="choice" repeat.for="role of data.app.availableRoles">
+              <ux-checkbox value.two-way="role" checked.two-way="instance.roles"></ux-checkbox>
+              <label slot="label" class="click">${role}</label>
+            </span>
+          </div>
+        </ux-field>
+      </template>
+      <template else>
+        <deco-field instance.bind="instance" property="${prop}" if.bind="properties === 'all' || properties.indexOf(prop) !== -1"></deco-field>
+      </template>
+    </template>
+  </ux-form>
+</template>

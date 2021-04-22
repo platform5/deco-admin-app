@@ -1,0 +1,97 @@
+<template>
+  <require from="./app.css"></require>
+  <section class="banner-block">
+    <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+      <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+    </ar-breadcrumb>
+    <h1>${app.name}</h1>
+  </section>
+  <section>
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-card sm="8"  class="ux-card--light">
+        <ux-card-header>
+          <ux-card-title class="ux-card__title">Statistics</ux-card-title>
+          <ux-card-sub-title class="ux-card__sub-title">See what's happening in your app !</ux-card-sub-title>
+        </ux-card-header>
+        <ux-card-content>
+          <h2>Would be cool to display here some usage statistics</h2>
+        </ux-card-content>
+      </ux-card>
+      <ux-card sm="4" class="ux-card--light">
+        <ux-card-header>
+          <ux-card-title class="ux-card__title">Manage your app</ux-card-title>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-list class="border" type="three-line">
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-settings', {appId: appId})">
+              <div class="ux-list-item__content">
+                Settings
+                <div class="ux-list-item__secondary-content">
+                  Make it fit precisely to all your needs
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-models', {appId: appId})">
+              <div class="ux-list-item__content">
+                Models
+                <div class="ux-list-item__secondary-content">
+                  Your models hold your data, make them awesome
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item  click.delegate="global.navigateToRoute('app-policies', {appId: appId})">
+              <div class="ux-list-item__content">
+                Policies
+                <div class="ux-list-item__secondary-content">
+                  Set policies to secure your data
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item  click.delegate="global.navigateToRoute('app-keys', {appId: appId})">
+              <div class="ux-list-item__content">
+                Developer Keys
+                <div class="ux-list-item__secondary-content">
+                  Manage your private and public keys
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-templates', {appId: appId})">
+              <div class="ux-list-item__content">
+                Templates
+                <div class="ux-list-item__secondary-content">
+                  Create beautiful template to communicate with your users
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-users', {appId: appId})">
+              <div class="ux-list-item__content">
+                Users
+                <div class="ux-list-item__secondary-content">
+                  Manage the people who use your app
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-push', {appId: appId})">
+              <div class="ux-list-item__content">
+                Push Notifications
+                <div class="ux-list-item__secondary-content">
+                  Send Push Notifications
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+        <ux-card-action-row>
+          <ux-button type="text" click.delegate="deleteApp()">Delete app</ux-button>
+        </ux-card-action-row>
+      </ux-card>
+    </ux-grid>
+  </section>
+</template>

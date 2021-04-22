@@ -1,0 +1,67 @@
+<template>
+  <require from="./app-templates.css"></require>
+  <section class="banner-block">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+        </ar-breadcrumb>
+        <h1>Templates</h1>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4" align-self-bottom>
+        <ux-button type="raised" click.delegate="createNewTemplate()"><ux-icon icon="add"></ux-icon> Add New Template</ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section>
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-grid-cell sm="8">
+
+
+        <div class="language-settings" if.bind="app.locales && app.locales.length && app.locales.length > 1">
+          <ux-grid>
+            <ux-grid-cell xs="6">
+              <h6>Content Language</h6>
+              <ux-chip click.delegate="setContentLocale(locale)" repeat.for="locale of app.locales" class="${locale !== contentLocale ? 'inactive': ''}">${locale}</ux-chip>
+            </ux-grid-cell>
+            <ux-grid-cell xs="6">
+              <h6>Reference Language</h6>
+              <ux-chip click.delegate="setRefLocale(locale)" repeat.for="locale of [''].concat(app.locales)" class="${locale !== refLocale ? 'inactive': ''}">${locale || 'None'}</ux-chip>
+            </ux-grid-cell>
+          </ux-grid>
+        </div>
+
+
+        <ux-list class="border" type="three-line">
+          <ux-list-item class="click" click.delegate="editTemplate(template)" repeat.for="template of templates">
+            <div class="ux-list-item__content">
+              ${template.key}
+              <div class="ux-list-item__secondary-content">
+                ${template.html.slice(0, 200)}
+              </div>
+            </div>
+            <ux-icon icon="chevron_right"></ux-icon>
+          </ux-list-item>
+        </ux-list>
+      </ux-grid-cell>
+      <ux-card sm="4" class="ux-card--light">
+        <ux-card-header>
+          <ux-card-title class="ux-card__title">Danger Zone</ux-card-title>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-list class="border" type="three-line">
+            <ux-list-item>
+              <div class="ux-list-item__content" click.delegate="deleteTemplate()">
+                Delete a template
+                <div class="ux-list-item__secondary-content">
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>  
+  </section>
+</template>

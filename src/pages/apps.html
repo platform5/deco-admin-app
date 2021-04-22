@@ -1,0 +1,46 @@
+<template>
+  <require from="./apps.css"></require>
+  <section class="banner-block">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <h1>Your Apps</h1>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4" align-self-bottom>
+        <ux-button type="raised" click.delegate="createNewApp()"><ux-icon icon="add"></ux-icon> Create New App</ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section id="apps">
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-card repeat.for="app of apps" sm="6" md="4">
+        <ux-card-header color="accent">
+          <ux-card-title class="ux-card__title">${app.name}</ux-card-title>
+          <ux-card-sub-title class="ux-card__sub-title">${app.description}</ux-card-sub-title>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-list class="border" type="three-line">
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app', {appId: app.id})">
+              <div class="ux-list-item__content">
+                Dashboard
+                <div class="ux-list-item__secondary-content">
+                  Stats and links to everything you need
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-models', {appId: app.id})">
+              <div class="ux-list-item__content">
+                Models
+                <div class="ux-list-item__secondary-content">
+                  Your models hold your data, make them awesome
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>
+
+  </section>
+</template>

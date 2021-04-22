@@ -1,0 +1,22 @@
+<template>
+  <require from="./ar-dialog-prompt-search-user.css"></require>
+  <ux-grid theme.bind="{outerPadding: '0'}">
+    <ux-grid-cell xs="8" sm="10">
+      <ar-search-input value.bind="q"></ar-search-input>
+    </ux-grid-cell>
+    <ux-grid-cell xs="4" sm="2">
+      <ux-button click.delegate="search()">Search</ux-button>
+    </ux-grid-cell>
+  </ux-grid>
+
+  <ux-list class="border" id="users-found-list">
+    <ux-list-item repeat.for="user of users">
+      <div class="ux-list-item__content ${currentlyInvitedUsers.indexOf(user.id) !== -1 ? 'already-invited':''}">
+        ${user.firstname} ${user.lastname}
+      </div>
+      <ux-checkbox if.bind="currentlyInvitedUsers.indexOf(user.id) === -1" value.bind="user.id" checked.bind="inviteUsers"></ux-checkbox>
+      <ux-icon else icon="check"></ux-icon>
+    </ux-list-item>
+  </ux-list>
+</template>
+  

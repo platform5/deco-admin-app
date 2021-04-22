@@ -1,0 +1,15 @@
+<template>
+  <ux-form if.bind="instance">
+    <ux-field label="Name">
+      <ux-input type="text" value.bind="instance.name"></ux-input>
+    </ux-field>
+    <ux-field label="Expiry">
+      <ux-datepicker type="date" value.bind="instance.expires"></ux-datepicker>
+      <ux-input-info>Leave blank to make unlimited key</ux-input-info>
+    </ux-field>
+    <ux-field label="Active">
+      <ux-switch checked.bind="instance.active"></ux-switch>
+    </ux-field>
+  </ux-form>
+</template>
+    

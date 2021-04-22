@@ -1,0 +1,10 @@
+ar-dialog-prompt-search-user .already-invited {
+  color: var(--ux-swatch--grey-p400);
+}
+
+ar-dialog-prompt-search-user #users-found-list {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  max-height: calc(100vh - 250px);
+  overflow: auto;
+}
