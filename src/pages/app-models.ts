@@ -80,7 +80,7 @@ export class AppModels {
         properties: ['name', 'slug']/*,
         viewPath: 'components/ad-dialog-model.html'*/
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model',
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model',
       editionCallback: () => {
         return newModel.save('');
       }

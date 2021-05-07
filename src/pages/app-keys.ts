@@ -55,7 +55,7 @@ export class AppKeys {
         properties: 'all',
         viewPath: 'components/ad-dialog-app-key.html'
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model',
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model',
       editionCallback: () => {
         let body = {
           name: key.name,

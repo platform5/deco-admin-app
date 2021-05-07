@@ -90,7 +90,7 @@ export class AppTemplates {
         refLocale: this.refLocale/*,
         viewPath: 'components/ad-dialog-model.html'*/
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model',
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model',
       editionCallback: () => {
         return newTemplate.save(`?locale=${this.contentLocale}`, {route: `/template/${this.app.id}`});
       }
@@ -115,7 +115,7 @@ export class AppTemplates {
         refLocale: this.refLocale/*,
         viewPath: 'components/ad-dialog-model.html'*/
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model',
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model',
       editionCallback: () => {
         return template.updateProperties(`?locale=${this.contentLocale}`, ['key', 'subject', 'html', 'text', 'sms'], {route: `/template/${this.app.id}/${template.id}`});
       }

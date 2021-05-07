@@ -98,7 +98,7 @@ export class AppUsers {
         viewPath: 'components/ad-dialog-user.html',
         data: {app: this.app}
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model', 
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model', 
       editionCallback: () => {
         return this.global.swissdataApi.put(`/app/${this.app.id}/user/${user.id}`, {
           requireDoubleAuth: user.requireDoubleAuth,
@@ -123,7 +123,7 @@ export class AppUsers {
         properties: ['roles'],
         viewPath: 'components/ar-dialog-swissdata-user.html'
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model', 
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model', 
       editionCallback: () => {
         return this.global.swissdataApi.put(`/app/${this.app.id}/parent-user/${user.id}`, {roles: user.roles}).then(jsonify).then((updatedUser) => {
           user.roles = (updatedUser as any).roles;
