@@ -1,7 +1,7 @@
 {
   "name": "deco-admin-app",
   "description": "An Aurelia client application for manage Deco-api multi-applications",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "build": "webpack --env.environment=production --env.production --extractCss",
     "build:dev": "webpack --extractCss",
