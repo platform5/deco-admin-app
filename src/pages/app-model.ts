@@ -185,7 +185,7 @@ export class AppModelModule {
         },
         viewPath: 'components/ad-dialog-field.html'
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model',
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model',
       editionCallback: () => {
         this.fixFields();
         return this.model.updateProperties('', ['fields']);

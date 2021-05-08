@@ -80,7 +80,7 @@ export class AppPush {
           tags: this.tags
         }
       },
-      editionViewModelPath: 'aurelia-deco/components/form/ad-dialog-model',
+      editionViewModelPath: 'aurelia-deco/deco/components/form/ad-dialog-model',
       editionCallback: () => {
         return notification.save('', {route: `/push/${this.appId}/notification`});
       }
