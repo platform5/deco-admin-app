@@ -4,7 +4,7 @@ import { Global } from 'global';
 import { getLogger, Logger } from 'aurelia-logging';
 import { activationStrategy } from 'aurelia-router';
 import { AppModel, jsonify } from 'aurelia-deco';
-import { arDialog, StringNumberMap } from 'aurelia-resources';
+import { arDialog } from 'aurelia-resources';
 
 @inject(Global)
 export class AppPush {    
@@ -13,7 +13,7 @@ export class AppPush {
   public appId: string = '';
   public app: AppModel;
 
-  private tags: StringNumberMap = {};
+  private tags: {[key: string]: number} = {};
   
   private refreshTimeout;
   
@@ -62,12 +62,12 @@ export class AppPush {
   getNotifications() {
     this.log.debug('getNotifications', this.app);
     if (!this.app) return;
-    PushNotificationModel.getAll('?sort=-_createdAt', {route: `/push/${this.appId}/notification`}).then((elements) => {
+    PushNotificationModel.getAll('?sort=-_createdAt', {route: `/push/${this.appId}/notification`}).then((elements) => {
       this.log.debug('elements', elements);
     });
   }
 
-  newNotification() {
+  newNotification() {
     let notification = new PushNotificationModel;
     let vm = arDialog({
       title: `New Notification`, 
