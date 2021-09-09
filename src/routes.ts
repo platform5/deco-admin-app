@@ -16,6 +16,7 @@ export let routes: Array<RouteConfig> = [
   { route: 'apps/:appId/keys',       name: 'app-keys',       moduleId: PLATFORM.moduleName('pages/app-keys'), settings: {auth: true} },
   { route: 'apps/:appId/policies',       name: 'app-policies',       moduleId: PLATFORM.moduleName('pages/app-policies'), settings: {auth: true} },
   { route: 'apps/:appId/templates',       name: 'app-templates',       moduleId: PLATFORM.moduleName('pages/app-templates'), settings: {auth: true} },
+  { route: 'apps/:appId/ldap-servers',       name: 'app-ldap-servers',       moduleId: PLATFORM.moduleName('pages/app-ldap-servers'), settings: {auth: true} },
   { route: 'apps/:appId/users',       name: 'app-users',       moduleId: PLATFORM.moduleName('pages/app-users'), settings: {auth: true} },
   { route: 'apps/:appId/push',       name: 'app-push',       moduleId: PLATFORM.moduleName('pages/app-push'), settings: {auth: true} },
   // { route: 'dico',       name: 'dico',       moduleId: PLATFORM.moduleName('aurelia-deco/components/dico/dico', 'dico'), settings: { auth: true } },

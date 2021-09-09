@@ -1,0 +1,52 @@
+<template>
+  <require from="./app-ldap-servers.css"></require>
+  <section class="banner-block">
+    <ux-grid>
+      <ux-grid-cell sm="8">
+        <ar-breadcrumb theme.bind="{pillBackground: 'var(--aurelia-ux--design-primary-light)'}">
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('apps')">Apps</ar-breadcrumb-item>
+          <ar-breadcrumb-item click.delegate="global.navigateToRoute('app', {appId: appId})">${app.name}</ar-breadcrumb-item>
+        </ar-breadcrumb>
+        <h1>LDAP Servers</h1>
+      </ux-grid-cell>
+      <ux-grid-cell sm="4" align-self-bottom>
+        <ux-button type="raised" click.delegate="createNewServer()"><ux-icon icon="add"></ux-icon> Add New Server</ux-button>
+      </ux-grid-cell>
+    </ux-grid>
+  </section>
+  <section>
+    <ux-grid theme.bind="{outerPadding:'0'}">
+      <ux-grid-cell sm="8">
+
+        <ux-list class="border" type="three-line">
+          <ux-list-item class="click" click.delegate="editServer(server)" repeat.for="server of servers">
+            <div class="ux-list-item__content">
+              ${server.name}
+              <div class="ux-list-item__secondary-content">
+                ${server.url}
+              </div>
+            </div>
+            <ux-icon icon="chevron_right"></ux-icon>
+          </ux-list-item>
+        </ux-list>
+      </ux-grid-cell>
+      <ux-card sm="4" class="ux-card--light">
+        <ux-card-header>
+          <ux-card-title class="ux-card__title">Danger Zone</ux-card-title>
+        </ux-card-header>
+        <ux-card-content>
+          <ux-list class="border" type="three-line">
+            <ux-list-item>
+              <div class="ux-list-item__content" click.delegate="deleteServer()">
+                Delete a server
+                <div class="ux-list-item__secondary-content">
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
+          </ux-list>
+        </ux-card-content>
+      </ux-card>
+    </ux-grid>  
+  </section>
+</template>

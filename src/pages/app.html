@@ -68,6 +68,15 @@
               </div>
               <ux-icon icon="chevron_right"></ux-icon>
             </ux-list-item>
+            <ux-list-item class="click" click.delegate="global.navigateToRoute('app-ldap-servers', {appId: appId})">
+              <div class="ux-list-item__content">
+                LDAP Servers
+                <div class="ux-list-item__secondary-content">
+                  Add LDAP Servers linked to this app
+                </div>
+              </div>
+              <ux-icon icon="chevron_right"></ux-icon>
+            </ux-list-item>
             <ux-list-item class="click" click.delegate="global.navigateToRoute('app-users', {appId: appId})">
               <div class="ux-list-item__content">
                 Users
