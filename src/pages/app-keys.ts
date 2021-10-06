@@ -37,7 +37,7 @@ export class AppKeys {
     });
   }
 
-  revealKey(type: 'public' | 'private', index: number) {
+  revealKey(type: 'public' | 'private', index: number) {
     return this.global.swissdataApi.get(`/app/${this.app.id}/key/${type}/${index}`).then(jsonify).then((result) => {
       if (result.key) {
         if (type === 'public') this.app.publicKeys[index].key = result.key;
@@ -69,7 +69,7 @@ export class AppKeys {
     });
     vm.whenClosed().then((result) => {
       if (!result.dismissed) {
-        notify(`Key ${key.name} has been updated`, {type: 'success'});
+        notify(`Key ${key.name} has been updated`, {type: 'success', formatter: undefined});
       }
     }).catch(errorify);
   }

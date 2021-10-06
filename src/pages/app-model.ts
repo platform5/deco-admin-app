@@ -2,8 +2,8 @@ import {inject} from 'aurelia-framework';
 import { Global } from 'global';
 import { getLogger, Logger } from 'aurelia-logging';
 import { activationStrategy } from 'aurelia-router';
-import { AppModel, DynamicConfigModel, DynamicConfigField } from 'aurelia-deco';
-import { arDialog, notify, errorify } from 'aurelia-resources';
+import { AppModel, DynamicConfigModel, DynamicConfigField } from 'aurelia-deco';
+import { arDialog, notify, errorify } from 'aurelia-resources';
 
 
 @inject(Global)
@@ -13,8 +13,8 @@ export class AppModelModule {
   public appId: string = '';
   public app: AppModel;
   public modelId: string = '';
-  public model:  DynamicConfigModel;
-  public models: Array< DynamicConfigModel> = [];
+  public model:  DynamicConfigModel;
+  public models: Array< DynamicConfigModel> = [];
 
   public newField: DynamicConfigField;
   public fields: Array<DynamicConfigField> = [];
@@ -31,11 +31,11 @@ export class AppModelModule {
 
   activate(params) {
     this.global.scrollToTop();
-    if (!params || !params.modelId) return false;
+    if (!params || !params.modelId) return false;
     if (!params.appId) return false;
     this.appId = params.appId;
     this.modelId = params.modelId;
-    return this.getApp().then(() => {
+    return this.getApp().then(() => {
       return this.getModel();
     }).then(() => {
       this.getModels();
@@ -103,7 +103,7 @@ export class AppModelModule {
         // remove slug validation and only add it if necessary
         let removeSlugIndex = -1;
         let slugIndex = 0;
-        for (let validation of field.validation || []) {
+        for (let validation of field.validation || []) {
           if (validation.type === 'slug') {
             removeSlugIndex = slugIndex;
             break;
@@ -118,7 +118,7 @@ export class AppModelModule {
 
         let removeEmailIndex = -1;
         let emailIndex = 0;
-        for (let validation of field.validation || []) {
+        for (let validation of field.validation || []) {
           if (validation.type === 'email') {
             removeEmailIndex = emailIndex;
             break;
@@ -141,7 +141,7 @@ export class AppModelModule {
         if (!Array.isArray(field.options.options)) {
           field.options.options = [];
         }
-      } else if (field.type === 'file' || field.type === 'files') {
+      } else if (field.type === 'file' || field.type === 'files') {
         if (!field.options) {
           field.options = {options: []};
         }
@@ -193,7 +193,7 @@ export class AppModelModule {
     });
     vm.whenClosed().then((result) => {
       if (!result.dismissed) {
-        notify(`Field ${field.name} has been updated`, {type: 'success'});
+        notify(`Field ${field.name} has been updated`, {type: 'success', formatter: undefined});
       }
     }).catch(errorify);
   }
@@ -212,7 +212,7 @@ export class AppModelModule {
     }).catch(errorify);
   }
 
-  saveSettings(type: 'main' | 'access' | 'notification') {
+  saveSettings(type: 'main' | 'access' | 'notification') {
     let fields: Array<string> = [];
     if (type === 'main') {
       fields = ['name', 'slug', 'label'];

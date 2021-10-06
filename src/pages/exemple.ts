@@ -11,7 +11,7 @@ export class Exemple {
   private src = 'images/welcome.jpg';
 
   private selectMultiple: boolean = false;
-  private selectValue: string | Array<string> = '';
+  private selectValue: string | Array<string> = '';
 
   private rangeValue = 50;
   private rangeValue1 = 300;
@@ -27,15 +27,15 @@ export class Exemple {
 
   notify(type: 'normal' | 'danger' | 'primary' | 'warning' | 'info' = 'normal') {
     if (type === 'normal') {
-      notify('Have a great day');
+      notify('Have a great day', {formatter: undefined});
     } else if (type === 'danger') {
-      notify('Be careful with this operation', {type: 'danger'});
+      notify('Be careful with this operation', {type: 'danger', formatter: undefined});
     } else if (type === 'info') {
-      notify('Input must be an integer', {type: 'info'});
+      notify('Input must be an integer', {type: 'info', formatter: undefined});
     } else if (type === 'primary') {
-      notify('Important notice', {type: 'primary'});
+      notify('Important notice', {type: 'primary', formatter: undefined});
     } else if (type === 'warning') {
-      notify('This was dangerous !', {type: 'warning'});
+      notify('This was dangerous !', {type: 'warning', formatter: undefined});
     }
   }
 
