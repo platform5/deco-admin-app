@@ -26,7 +26,7 @@
         <ar-search-input value.two-way="search"></ar-search-input>
       </ux-grid-cell>
     </ux-grid>
-    <ux-card repeat.for="user of users |filterSearch:search" ref="user.__card" class="${user.__card.offsetWidth > 700 ? 'large':'small'}">
+    <ux-card repeat.for="user of users | filterSearch:search" ref="user.__card" class="${user.__card.offsetWidth > 700 ? 'large':'small'}">
       <ux-card-header>
         <ux-card-title class="ux-card__title">
           ${user._label}

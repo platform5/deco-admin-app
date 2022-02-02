@@ -198,11 +198,11 @@ export class filterSearchValueConverter {
         value.push(item);
         continue;
       }
-      if (item.email.toLowerCase().indexOf(q) !== -1) {
+      if (item.email && item.email.toLowerCase().indexOf(q) !== -1) {
         value.push(item);
         continue;
       }
-      if (item.mobile.toLowerCase().indexOf(q) !== -1) {
+      if (item.mobile && item.mobile.toLowerCase().indexOf(q) !== -1) {
         value.push(item);
         continue;
       }
