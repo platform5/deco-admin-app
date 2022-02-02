@@ -1,6 +1,13 @@
 {
   "version": "0.2.0",
   "configurations": [
+  {
+    "name": "Launch Edge",
+    "request": "launch",
+    "type": "pwa-msedge",
+    "url": "http://localhost:5070",
+    "webRoot": "${workspaceFolder}"
+  },
     {
       "name": "Chrome",
       "type": "chrome",
