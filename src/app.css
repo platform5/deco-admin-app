@@ -44,3 +44,27 @@ section > ux-grid > ux-card.ux-card--light {
 .settings-card.opened ux-card-title ux-icon {
   transform: rotate(90deg);
 }
+
+@media (min-width: 480px) {
+  ar-dialog ux-card.dialog-card {
+      min-height: auto;
+      min-width: 480px;
+      max-width: 90%;
+  }
+}
+
+@media (min-width: 768px) {
+  ar-dialog ux-card.dialog-card {
+      min-height: auto;
+      min-width: 700px;
+      max-width: 90%;
+  }
+}
+
+@media (min-width: 1024px) {
+  ar-dialog ux-card.dialog-card {
+    min-height: auto;
+    min-width: 1000px;
+    max-width: 90%;
+}
+}
