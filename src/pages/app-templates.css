@@ -11,5 +11,5 @@
 
 .language-settings ux-chip.inactive {
   border-color: var(--ux-swatch--grey-p300)!important;
-  color: var(--ux-swatch--grey-p300)!important;
+  color: var(--ux-swatch--grey-p500)!important;
 }
