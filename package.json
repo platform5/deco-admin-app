@@ -37,7 +37,7 @@
     "@aurelia-ux/positioning": "^0.25.0",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.2",
-    "aurelia-deco": "^3.0.50",
+    "aurelia-deco": "^3.0.53",
     "aurelia-dialog": "^2.0.0",
     "aurelia-i18n": "^2.3.2",
     "aurelia-notify": "^0.8.1",

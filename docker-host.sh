@@ -12,14 +12,14 @@ ME=$(basename $0)
 
 NEWHOST='"host":"'$HOST'"'
 LOCALHOST='"host":"http://localhost:3000"'
-LOCALHOST1='"host":"https://api.swissdata.io/prod"'
+LOCALHOST1='"host":"https://api.swissdata.io"'
 
 NEWTMAPIKEY='"translationMemoryApiKey":"'$TMAPIKEY'"'
 LOCALAPIKEY='"translationMemoryApiKey":"ca5e3b78367c"'
 
 NEWTMHOST='"translationMemoryHost":"'$TMHOST'"'
 LOCALTMHOST='"translationMemoryHost":"http://localhost:3000"'
-LOCALTMHOST1='"translationMemoryHost":"https://api.swissdata.io/prod"'
+LOCALTMHOST1='"translationMemoryHost":"https://api.swissdata.io"'
 
 
 for jsfile in /usr/share/nginx/html/*.chunk.js

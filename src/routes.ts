@@ -3,12 +3,13 @@ import {RouteConfig} from 'aurelia-router';
 
 export let routes: Array<RouteConfig> = [
   { route: ['', 'login'],       name: 'login',       moduleId: PLATFORM.moduleName('pages/login-page') },
+  { route: 'login',       name: 'login',       moduleId: PLATFORM.moduleName('pages/login-page') },
   { route: 'account',       name: 'account',       moduleId: PLATFORM.moduleName('pages/account'), settings: {auth: true} },
   { route: 'profile',       name: 'profile',       moduleId: PLATFORM.moduleName('pages/account-profile'), settings: {auth: true} },
   { route: 'credentials',       name: 'credentials',       moduleId: PLATFORM.moduleName('pages/account-credentials'), settings: {auth: true} },
   { route: 'exemples',       name: 'exemple',       moduleId: PLATFORM.moduleName('pages/exemple') },
-
-  { route: 'apps',       name: 'apps',       moduleId: PLATFORM.moduleName('pages/apps'), settings: {auth: true} },
+  
+  { route: ['', 'apps'],       name: 'apps',       moduleId: PLATFORM.moduleName('pages/apps'), settings: {auth: true} },
   { route: 'apps/:appId',       name: 'app',       moduleId: PLATFORM.moduleName('pages/app'), settings: {auth: true} },
   { route: 'apps/:appId/settings',       name: 'app-settings',       moduleId: PLATFORM.moduleName('pages/app-settings'), settings: {auth: true} },
   { route: 'apps/:appId/models',       name: 'app-models',       moduleId: PLATFORM.moduleName('pages/app-models'), settings: {auth: true} },

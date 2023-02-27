@@ -7,7 +7,7 @@
     <ux-list>
       <ux-list-item class="click" click.delegate="gotoRoute('apps')">
         <div class="ux-list-item__content">
-          <span t="menu.Apps" if.bind="global.state.swissdata.authenticated"></span>
+          <span if.bind="global.state.swissdata.authenticated">Apps</span>
           <span t="menu.Login" if.bind="!global.state.swissdata.authenticated"></span>
         </div>
         <div class="ux-list-item__action-item">
