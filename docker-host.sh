@@ -10,19 +10,19 @@ entrypoint_log() {
 
 ME=$(basename $0)
 
-NEWHOST='"host":"'$HOST'"'
-LOCALHOST='"host":"http://localhost:3000"'
+NEWHOST='"host":"'$APIHOST'"'
+LOCALHOST='"host":"http://localhost:3040"'
 LOCALHOST1='"host":"https://api.swissdata.io"'
 
 NEWTMAPIKEY='"translationMemoryApiKey":"'$TMAPIKEY'"'
 LOCALAPIKEY='"translationMemoryApiKey":"ca5e3b78367c"'
 
 NEWTMHOST='"translationMemoryHost":"'$TMHOST'"'
-LOCALTMHOST='"translationMemoryHost":"http://localhost:3000"'
+LOCALTMHOST='"translationMemoryHost":"http://localhost:3040"'
 LOCALTMHOST1='"translationMemoryHost":"https://api.swissdata.io"'
 
 
-for jsfile in /usr/share/nginx/html/*.chunk.js
+for jsfile in /usr/share/nginx/html/app*.chunk.js
 do
    sed -i 's,'$LOCALHOST','$NEWHOST',g' $jsfile
    sed -i 's,'$LOCALHOST1','$NEWHOST',g' $jsfile
